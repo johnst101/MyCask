@@ -27,7 +27,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 ### Task 0.2: Project Initialization (2-3 days)
 
-- [ ] Initialize React app with Vite: `npm create vite@latest mycask-frontend -- --template react`
+- [x] Initialize React app with Vite: `npm create vite@latest mycask-frontend -- --template react`
 - [ ] Set up Tailwind CSS
 - [ ] Initialize FastAPI project structure
 - [ ] Set up PostgreSQL locally (or use Docker)
