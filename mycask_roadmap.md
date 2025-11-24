@@ -17,7 +17,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
   - ESLint, Prettier, Python, Tailwind IntelliSense
 - [x] Create GitHub repository with README
 - [x] Research and document PWA basics (manifests, service workers)
-- [ ] Read FastAPI documentation quick start
+- [x] Read FastAPI documentation quick start
 - [ ] Read React documentation (especially Hooks)
 
 **Documentation to Create:**
@@ -31,8 +31,8 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 - [x] Set up Tailwind CSS
 - [x] Initialize FastAPI project structure
 - [ ] Set up PostgreSQL locally (or use Docker)
-- [ ] Create `.gitignore` for both frontend and backend
-- [ ] Set up basic folder structure:
+- [x] Create `.gitignore` for both frontend and backend
+- [x] Set up basic folder structure:
   ```
   /mycask
     /frontend
