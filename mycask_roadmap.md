@@ -30,7 +30,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 - [x] Initialize React app with Vite: `npm create vite@latest mycask-frontend -- --template react`
 - [x] Set up Tailwind CSS
 - [x] Initialize FastAPI project structure
-- [ ] Set up PostgreSQL locally (or use Docker)
+- [x] Set up PostgreSQL locally (or use Docker)
 - [x] Create `.gitignore` for both frontend and backend
 - [x] Set up basic folder structure:
   ```
