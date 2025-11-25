@@ -60,9 +60,9 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 - [x] Set up ESLint and Prettier for code formatting
 - [x] Create development scripts in `package.json`
-- [ ] Set up hot-reload for both frontend and backend
-- [ ] Configure CORS for local development
-- [ ] Test that frontend can call backend API (simple health check endpoint)
+- [x] Set up hot-reload for both frontend and backend
+- [x] Configure CORS for local development
+- [x] Test that frontend can call backend API (simple health check endpoint)
 
 **Deliverable:** Working development environment where you can run both frontend and backend simultaneously
 
