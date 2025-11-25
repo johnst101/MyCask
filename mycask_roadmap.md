@@ -59,7 +59,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 ### Task 0.3: Development Workflow Setup (1-2 days)
 
 - [x] Set up ESLint and Prettier for code formatting
-- [ ] Create development scripts in `package.json`
+- [x] Create development scripts in `package.json`
 - [ ] Set up hot-reload for both frontend and backend
 - [ ] Configure CORS for local development
 - [ ] Test that frontend can call backend API (simple health check endpoint)
