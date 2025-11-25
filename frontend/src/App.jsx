@@ -1,10 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [serverUrl] = useState('http://localhost:8000');
+  const [apiResponse, setApiResponse] = useState(null);
+
+  useEffect(() => {
+    fetch(`${serverUrl}/`)
+      .then((res) => res.json())
+      .then((apiResponse) => setApiResponse(apiResponse))
+      .catch((err) => console.error('CORS Error:', err));
+  }, [serverUrl, setApiResponse]);
 
   return (
     <>
@@ -19,7 +28,12 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          API response is{' '}
+          {apiResponse ? JSON.stringify(apiResponse) : 'loading...'}
+        </button>
+        <br />
+        <button onClick={() => setCount((count) => count + 1)}>
+          The count is {count}
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
@@ -29,7 +43,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
