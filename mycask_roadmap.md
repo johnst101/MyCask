@@ -74,7 +74,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 ### Task 1.1: Database Design & Setup (3-4 days)
 
-- [ ] Design database schema (see schema section below)
+- [x] Design database schema (see schema section below)
 - [ ] Create SQLAlchemy models for:
   - Users
   - Bottles
