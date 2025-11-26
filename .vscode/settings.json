@@ -28,7 +28,7 @@
   },
 
   // Editor preferences
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "editor.linkedEditing": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
