@@ -38,6 +38,7 @@ erDiagram
         decimal_10_2 msrp
         varchar_50 barcode UK
         text description
+        varchar_500 mashbill_description
         varchar_500 image_url
         timestamp created_at
         timestamp updated_at

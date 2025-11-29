@@ -7,6 +7,7 @@ Supports soft deletes via is_active and deleted_at fields.
 
 from ..db.database import Base
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, func
+from sqlalchemy.orm import relationship
 
 class User(Base):
     __tablename__ = "users"
@@ -19,3 +20,8 @@ class User(Base):
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
     deleted_at = Column(DateTime, nullable=True)  # NULL indicates soft delete
+
+    # Relationships
+    user_bottles = relationship("UserBottle", back_populates="user", cascade="all, delete-orphan")
+    tastings = relationship("Tasting", back_populates="user", cascade="all, delete-orphan")
+    wishlists = relationship("Wishlist", back_populates="user", cascade="all, delete-orphan")

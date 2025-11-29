@@ -6,6 +6,7 @@ Represents general bottles in the MyCask application with various attributes.
 
 from ..db.database import Base
 from sqlalchemy import Column, Integer, String, DateTime, Decimal, func
+from sqlalchemy.orm import relationship
 
 class Bottle(Base):
     __tablename__ = "bottles"
@@ -20,6 +21,13 @@ class Bottle(Base):
     msrp = Column(Decimal(precision=10, scale=2), nullable=True)
     barcode = Column(String(50), unique=True, index=True, nullable=True)  # UK barcode
     description = Column(String, nullable=True)
+    mashbill_description = Column(String(500), nullable=True)
     image_url = Column(String, nullable=True)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    # Relationships
+    user_bottles = relationship("UserBottle", back_populates="bottle", cascade="all, delete-orphan")
+    tastings = relationship("Tasting", back_populates="bottle", cascade="all, delete-orphan")
+    bottle_prices = relationship("BottlePrice", back_populates="bottle", cascade="all, delete-orphan")
+    wishlists = relationship("Wishlist", back_populates="bottle", cascade="all, delete-orphan")
