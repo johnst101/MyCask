@@ -64,11 +64,13 @@ alembic revision --autogenerate -m "Description of changes"
 ```
 
 **Example:**
+
 ```bash
 alembic revision --autogenerate -m "Add mashbill_description to bottles table"
 ```
 
 **Important Notes:**
+
 - Always review the generated migration file before applying it
 - Alembic may not detect all changes (e.g., table renames, data migrations)
 - Make sure all model files are imported in `alembic/env.py` so Alembic can detect them
@@ -100,6 +102,7 @@ alembic upgrade <revision_id>
 ```
 
 Example:
+
 ```bash
 alembic upgrade d4e5ac8c78d7
 ```
@@ -139,7 +142,7 @@ alembic downgrade base
 ### Typical Development Workflow
 
 1. **Modify Models**: Update SQLAlchemy models in `backend/app/models/`
-2. **Generate Migration**: 
+2. **Generate Migration**:
    ```bash
    alembic revision --autogenerate -m "Your change description"
    ```
@@ -154,6 +157,7 @@ alembic downgrade base
 ### Example: Adding a New Column
 
 1. Edit `backend/app/models/bottle.py`:
+
    ```python
    class Bottle(Base):
        # ... existing columns ...
@@ -161,6 +165,7 @@ alembic downgrade base
    ```
 
 2. Generate migration:
+
    ```bash
    alembic revision --autogenerate -m "Add new_field to bottles"
    ```
@@ -175,6 +180,7 @@ alembic downgrade base
 ## How Alembic Detects Changes
 
 Alembic compares:
+
 - **Current Database Schema** (from `alembic_version` table)
 - **Model Definitions** (from SQLAlchemy models imported in `env.py`)
 
@@ -184,19 +190,20 @@ All models must be imported in `backend/alembic/env.py`:
 
 ```python
 from app.models import (
-    user, 
-    bottle, 
-    user_bottle, 
-    bottle_purchase, 
-    bottle_prices, 
-    tasting, 
-    tasting_flavors, 
-    flavor_tags, 
+    user,
+    bottle,
+    user_bottle,
+    bottle_purchase,
+    bottle_prices,
+    tasting,
+    tasting_flavors,
+    flavor_tags,
     wishlist
 )
 ```
 
 **When adding a new model:**
+
 1. Create the model file in `backend/app/models/`
 2. Add the import to `backend/alembic/env.py`
 3. Generate a new migration
@@ -221,6 +228,7 @@ This ensures Alembic uses the same database connection as your application.
 ### 1. Always Review Auto-generated Migrations
 
 Auto-generated migrations may need manual adjustments:
+
 - Check for correct column types
 - Verify foreign key constraints
 - Ensure indexes are created correctly
@@ -243,6 +251,7 @@ Always test migrations on a development database before applying to production.
 ### 4. Keep Migrations Small and Focused
 
 One logical change per migration makes it easier to:
+
 - Review changes
 - Debug issues
 - Rollback if needed
@@ -254,6 +263,7 @@ Once a migration has been applied to production, don't modify it. Create a new m
 ### 6. Backup Before Major Migrations
 
 Before running migrations that modify large tables or drop columns:
+
 ```bash
 # Create database backup
 pg_dump -U mycask mycask > backup_$(date +%Y%m%d).sql
@@ -264,11 +274,13 @@ pg_dump -U mycask mycask > backup_$(date +%Y%m%d).sql
 ### Issue: "Target database is not up to date"
 
 **Error:**
+
 ```
 ERROR [alembic.util.messaging] Target database is not up to date
 ```
 
 **Solution:**
+
 ```bash
 alembic upgrade head
 ```
@@ -276,11 +288,13 @@ alembic upgrade head
 ### Issue: "Can't locate revision identified by 'xxxx'"
 
 **Error:**
+
 ```
 Can't locate revision identified by 'xxxx'
 ```
 
 **Solution:**
+
 - Check migration history: `alembic history`
 - Verify migration files exist in `backend/alembic/versions/`
 - Ensure you're on the correct branch if using Git
@@ -288,12 +302,14 @@ Can't locate revision identified by 'xxxx'
 ### Issue: "ImportError: cannot import name 'Decimal'"
 
 **Error:**
+
 ```
 ImportError: cannot import name 'Decimal' from 'sqlalchemy'
 ```
 
 **Solution:**
 Use `Numeric` instead of `Decimal` in model imports:
+
 ```python
 from sqlalchemy import Column, Integer, String, Numeric  # Not Decimal
 ```
@@ -301,11 +317,13 @@ from sqlalchemy import Column, Integer, String, Numeric  # Not Decimal
 ### Issue: "Could not parse SQLAlchemy URL"
 
 **Error:**
+
 ```
 sqlalchemy.exc.ArgumentError: Could not parse SQLAlchemy URL
 ```
 
 **Solution:**
+
 - Verify `DATABASE_URL` is set in `.env` file
 - Check that `alembic/env.py` loads environment variables correctly
 - Ensure database URL format is correct: `postgresql://user:password@host:port/database`
@@ -315,6 +333,7 @@ sqlalchemy.exc.ArgumentError: Could not parse SQLAlchemy URL
 **Problem:** Alembic doesn't detect model changes.
 
 **Solution:**
+
 1. Ensure model file is imported in `alembic/env.py`
 2. Check that model inherits from `Base` (from `app.db.database`)
 3. Verify model has `__tablename__` defined
@@ -325,16 +344,19 @@ sqlalchemy.exc.ArgumentError: Could not parse SQLAlchemy URL
 If multiple developers create migrations simultaneously:
 
 1. **Pull latest changes:**
+
    ```bash
    git pull
    ```
 
 2. **Check current database state:**
+
    ```bash
    alembic current
    ```
 
 3. **Apply missing migrations:**
+
    ```bash
    alembic upgrade head
    ```
@@ -383,7 +405,7 @@ For migrating data (not just schema):
 def upgrade() -> None:
     # Schema change
     op.add_column('users', sa.Column('full_name', sa.String(255)))
-    
+
     # Data migration
     connection = op.get_bind()
     connection.execute(
@@ -401,7 +423,7 @@ def upgrade() -> None:
     # Check if column exists before adding
     inspector = sa.inspect(op.get_bind())
     columns = [col['name'] for col in inspector.get_columns('bottles')]
-    
+
     if 'new_field' not in columns:
         op.add_column('bottles', sa.Column('new_field', sa.String(100)))
 ```
@@ -421,15 +443,14 @@ def upgrade() -> None:
 
 ## Quick Reference
 
-| Command | Description |
-|---------|-------------|
-| `alembic current` | Show current database revision |
-| `alembic history` | Show migration history |
-| `alembic revision --autogenerate -m "msg"` | Auto-generate migration |
-| `alembic revision -m "msg"` | Create empty migration |
-| `alembic upgrade head` | Apply all pending migrations |
-| `alembic upgrade +1` | Apply next migration |
-| `alembic downgrade -1` | Revert last migration |
-| `alembic downgrade base` | Remove all migrations |
-| `alembic stamp head` | Mark database as current without running migrations |
-
+| Command                                    | Description                                         |
+| ------------------------------------------ | --------------------------------------------------- |
+| `alembic current`                          | Show current database revision                      |
+| `alembic history`                          | Show migration history                              |
+| `alembic revision --autogenerate -m "msg"` | Auto-generate migration                             |
+| `alembic revision -m "msg"`                | Create empty migration                              |
+| `alembic upgrade head`                     | Apply all pending migrations                        |
+| `alembic upgrade +1`                       | Apply next migration                                |
+| `alembic downgrade -1`                     | Revert last migration                               |
+| `alembic downgrade base`                   | Remove all migrations                               |
+| `alembic stamp head`                       | Mark database as current without running migrations |

@@ -8,7 +8,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://mycask:mycask123@localhos
 
 from app.db.database import Base
 # Import all models so Alembic can detect them
-from app.models import user, bottle, user_bottle, bottle_purchase, bottle_prices, tasting, tasting_flavors, flavor_tags, wishlist
+from app.models import User, Bottle, UserBottle, BottlePurchase, BottlePrice, Tasting, TastingFlavor, FlavorTag, Wishlist
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
