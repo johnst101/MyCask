@@ -75,19 +75,19 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 ### Task 1.1: Database Design & Setup (3-4 days)
 
 - [x] Design database schema (see schema section below)
-- [ ] Create SQLAlchemy models for:
+- [x] Create SQLAlchemy models for:
   - Users
   - Bottles
   - Collections
   - Tastings
   - Flavor Profiles
-- [ ] Write and test database migrations (Alembic)
+- [x] Write and test database migrations (Alembic)
 - [ ] Create seed data script for testing (10-20 sample bottles)
 - [ ] Write database helper functions (CRUD operations)
 
 **Documentation to Create:**
 
-- `DATABASE_SCHEMA.md` - Entity relationship diagram and table definitions
+- `MYCASK_DATABASE_ERD.md` - Entity relationship diagram and table definitions
 - `MIGRATION_GUIDE.md` - How to run migrations
 
 **Learning Resources:**
