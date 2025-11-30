@@ -5,7 +5,7 @@ Represents general bottles in the MyCask application with various attributes.
 """
 
 from ..db.database import Base
-from sqlalchemy import Column, Integer, String, DateTime, Decimal, func
+from sqlalchemy import Column, Integer, String, DateTime, Numeric, func
 from sqlalchemy.orm import relationship
 
 class Bottle(Base):
@@ -17,8 +17,8 @@ class Bottle(Base):
     type = Column(String(50), nullable=True)  # e.g., bourbon, scotch, rye
     region = Column(String(100), nullable=True)
     age_years = Column(Integer, nullable=True)
-    abv = Column(Decimal(precision=4, scale=2), nullable=True)  # e.g., "43.50"
-    msrp = Column(Decimal(precision=10, scale=2), nullable=True)
+    abv = Column(Numeric(precision=4, scale=2), nullable=True)  # e.g., "43.50"
+    msrp = Column(Numeric(precision=10, scale=2), nullable=True)
     barcode = Column(String(50), unique=True, index=True, nullable=True)  # UK barcode
     description = Column(String, nullable=True)
     mashbill_description = Column(String(500), nullable=True)

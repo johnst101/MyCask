@@ -6,7 +6,7 @@ prices from retailers or market sources over time.
 """
 
 from ..db.database import Base
-from sqlalchemy import Column, Integer, String, DateTime, Decimal, ForeignKey, func
+from sqlalchemy import Column, Integer, String, DateTime, Numeric, ForeignKey, func
 from sqlalchemy.orm import relationship
 from .bottle import Bottle
 
@@ -15,7 +15,7 @@ class BottlePrice(Base):
 
     id = Column(Integer, index=True, primary_key=True)
     bottle_id = Column(Integer, ForeignKey(Bottle.id, ondelete="CASCADE"), nullable=False)
-    price = Column(Decimal(precision=10, scale=2), nullable=True)
+    price = Column(Numeric(precision=10, scale=2), nullable=True)
     source = Column(String(100), nullable=True)  # retailer or 'market'
     recorded_at = Column(DateTime, server_default=func.now(), nullable=False)
 
