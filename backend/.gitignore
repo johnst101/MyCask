@@ -89,3 +89,7 @@ logs/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Scripts output files
+scripts/*.txt
+scripts/*.log

@@ -82,8 +82,8 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
   - Tastings
   - Flavor Profiles
 - [x] Write and test database migrations (Alembic)
-- [ ] Create seed data script for testing (10-20 sample bottles)
-- [ ] Write database helper functions (CRUD operations)
+- [x] Create seed data script for testing (10-20 sample bottles)
+- [x] Write database helper functions (CRUD operations)
 
 **Documentation to Create:**
 
