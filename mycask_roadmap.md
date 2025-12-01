@@ -97,8 +97,8 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 ### Task 1.2: Authentication System (3-4 days)
 
-- [ ] Implement user registration endpoint
-- [ ] Implement login endpoint with JWT tokens
+- [x] Implement user registration endpoint
+- [x] Implement login endpoint with JWT tokens
 - [ ] Create password hashing utilities (bcrypt)
 - [ ] Build token refresh mechanism
 - [ ] Add authentication middleware to protect routes
