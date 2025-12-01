@@ -10,17 +10,19 @@ from app.services.user import create_user, get_any_user_by_email
 from app.db.database import get_db
 from app.schemas.user import UserCreate, UserResponse
 from app.schemas.token import Token
-from app.core.security import hash_password, verify_password, create_access_token
+from app.core.security import hash_password, verify_password, create_access_token, validate_password_strength
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
 @router.post("/register", status_code=status.HTTP_201_CREATED, response_model=UserResponse)
 def register(user_data: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     '''Register a new user by providing email, password, username, first name, and last name'''
-    if len(user_data.password) < 8:
+    # Validate password strength
+    is_valid, error_message = validate_password_strength(user_data.password)
+    if not is_valid:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Password must be at least 8 characters long"
+            detail=error_message
         )
 
     if get_any_user_by_email(db, user_data.email):

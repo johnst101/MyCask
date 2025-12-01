@@ -4,9 +4,7 @@ Seed the database with initial data.
 
 from app.db.database import SessionLocal
 from app.models import User, UserBottle, BottlePrice, BottlePurchase, Bottle, Tasting, TastingFlavor, FlavorTag, Wishlist
-from passlib.context import CryptContext
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from app.core.security import hash_password
 
 def seed_database():
     db = SessionLocal()
@@ -28,21 +26,21 @@ def seed_database():
         email="tylercjohnson16@gmail.com",
         first_name="Tyler",
         last_name="Johnson",
-        password_hash=pwd_context.hash("password"),
+        password_hash=hash_password("password"),
         username="tyler.johnson"
     )
     user2 = User(
         email="chris.johnson@trimarq.com",
         first_name="Chris",
         last_name="Johnson",
-        password_hash=pwd_context.hash("password"),
+        password_hash=hash_password("password"),
         username="chris.johnson"
     )
     user3 = User(
         email="emily_johnson@comcast.net",
         first_name="Emily",
         last_name="Johnson",
-        password_hash=pwd_context.hash("password"),
+        password_hash=hash_password("password"),
         username="emily.johnson"
     )
     db.add(user1)
