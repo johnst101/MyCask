@@ -26,21 +26,21 @@ def seed_database():
         email="tylercjohnson16@gmail.com",
         first_name="Tyler",
         last_name="Johnson",
-        password_hash=hash_password("password"),
+        password_hash=hash_password("Password123!"),
         username="tyler.johnson"
     )
     user2 = User(
         email="chris.johnson@trimarq.com",
         first_name="Chris",
         last_name="Johnson",
-        password_hash=hash_password("password"),
+        password_hash=hash_password("Password123!"),
         username="chris.johnson"
     )
     user3 = User(
         email="emily_johnson@comcast.net",
         first_name="Emily",
         last_name="Johnson",
-        password_hash=hash_password("password"),
+        password_hash=hash_password("Password123!"),
         username="emily.johnson"
     )
     db.add(user1)
