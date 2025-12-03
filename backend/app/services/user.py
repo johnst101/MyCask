@@ -4,6 +4,7 @@ CRUD operations for users.
 
 from sqlalchemy.orm import Session
 from sqlalchemy import func
+from datetime import datetime, timezone
 from app.models import User
 from typing import Optional
 
@@ -53,7 +54,7 @@ def delete_user(db: Session, user_id: int) -> bool:
         return False
     
     user.is_active = False
-    user.deleted_at = func.now()
+    user.deleted_at = datetime.now(timezone.utc)
     db.commit()
     return True
 
