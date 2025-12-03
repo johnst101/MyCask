@@ -10,6 +10,7 @@ erDiagram
     bottles ||--o{ tastings : "tasted"
     bottles ||--o{ bottle_prices : "has prices"
     bottles ||--o{ wishlists : "wanted"
+    bottles ||--o{ bottles : "has variants"
 
     user_bottles ||--o{ bottle_purchases : "purchase history"
 
@@ -40,6 +41,18 @@ erDiagram
         text description
         varchar_500 mashbill_description
         varchar_500 image_url
+        boolean is_variant "DEFAULT FALSE"
+        int parent_bottle_id FK "REFERENCES bottles(id)"
+        varchar_100 barrel_number
+        varchar_50 warehouse
+        varchar_100 batch_number
+        int vintage_year
+        decimal_5_2 proof_actual
+        varchar_50 age_statement_actual
+        text pick_information
+        varchar_50 tier_run
+        date bottle_date
+        text release_info
         timestamp created_at
         timestamp updated_at
     }
