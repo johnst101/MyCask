@@ -9,8 +9,8 @@ from sqlalchemy.exc import IntegrityError
 from app.services.user import create_user, get_any_user_by_email
 from app.db.database import get_db
 from app.schemas.user import UserCreate, UserResponse
-from app.schemas.token import Token
-from app.core.security import hash_password, verify_password, create_access_token, validate_password_strength
+from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token, validate_password_strength, verify_refresh_token
+from app.schemas.token import RefreshTokenRequest, Token
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 
@@ -108,5 +108,56 @@ def login(
     
     # Create JWT token with user email as subject
     access_token = create_access_token(data={"sub": user.email})
+    refresh_token = create_refresh_token(data={"sub": user.email})
     
-    return Token(access_token=access_token, token_type="bearer")
+    return Token(access_token=access_token, refresh_token=refresh_token, token_type="bearer")
+
+@router.post("/refresh", response_model=Token)
+def refresh(request: RefreshTokenRequest, db: Session = Depends(get_db)) -> Token:
+    """
+    # TODO: Update to get refresh token from cookies instead of request body (copying and pasting right now is annoying)
+    Refresh access token using a valid refresh token.
+    
+    Returns new access token and refresh token (token rotation).
+    """
+    try:
+        # Verify the refresh token
+        payload = verify_refresh_token(request.refresh_token)
+        print(f"Payload: {payload}")
+        user_email = payload.get("sub")
+        
+        if not user_email:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token payload"
+            )
+        
+        # Optional: Verify user still exists and is active
+        user = get_any_user_by_email(db, user_email)
+        if not user or not user.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User not found or inactive"
+            )
+        
+        # Create new tokens (token rotation)
+        new_access_token = create_access_token(data={"sub": user_email})
+        new_refresh_token = create_refresh_token(data={"sub": user_email})
+        
+        return Token(
+            access_token=new_access_token,
+            refresh_token=new_refresh_token,
+            token_type="bearer"
+        )
+        
+    except HTTPException as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired refresh token"
+        )
+    except Exception as e:
+        # Log the error in production
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to refresh token"
+        )

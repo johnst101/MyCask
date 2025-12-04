@@ -100,7 +100,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 - [x] Implement user registration endpoint
 - [x] Implement login endpoint with JWT tokens
 - [x] Create password hashing utilities (bcrypt)
-- [ ] Build token refresh mechanism
+- [x] Build token refresh mechanism
 - [ ] Add authentication middleware to protect routes
 - [ ] Write tests for auth endpoints
 
@@ -387,6 +387,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 ### Task 7.3: Testing & Bug Fixes (2-3 days)
 
+- [ ] Upgrade refresh tokens to httpOnly cookies
 - [ ] Write integration tests (key user flows)
 - [ ] Test on multiple devices and browsers
 - [ ] Fix responsive design issues
