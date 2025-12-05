@@ -101,8 +101,8 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 - [x] Implement login endpoint with JWT tokens
 - [x] Create password hashing utilities (bcrypt)
 - [x] Build token refresh mechanism
-- [ ] Add authentication middleware to protect routes
-- [ ] Write tests for auth endpoints
+- [x] Add authentication middleware to protect routes
+- [x] Write tests for auth endpoints
 
 **Frontend:**
 
@@ -114,7 +114,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 **Documentation to Create:**
 
-- `API.md` - Start documenting all API endpoints (auth section)
+- `API.md` - handled already by FastAPI's "/docs" endpoint
 - `SECURITY.md` - Security considerations and best practices
 
 ### Task 1.3: Basic UI Shell (2-3 days)
@@ -136,6 +136,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 ### Task 2.1: Bottle Data Structure & API (3-4 days)
 
+- [ ] Check failing errors in the current API endpoint tests
 - [ ] Research and document bottle attributes (name, distillery, type, ABV, age, etc.)
 - [ ] Create bottle schema/validation (Pydantic)
 - [ ] Build bottle CRUD endpoints:
