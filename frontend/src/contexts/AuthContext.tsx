@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User } from '../types/user';
+import { fetchCurrentUser, loginUser } from '../services/authService';
 
 interface AuthContextType {
   user: User | null;
@@ -25,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (token) {
         // Token exists, verify it's valid by fetching user
         try {
-          const userData = await fetchCurrentUser(token);
+          const userData = await fetchCurrentUser();
           setUser(userData);
         } catch (error) {
           // Token invalid, remove it
@@ -42,27 +43,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ username: email, password: password }),
-      });
-
-      if (!response.ok) throw new Error('Login failed');
-
-      const data = await response.json();
-
-      // Store tokens in localStorage
+      const data = await loginUser(email, password);
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
-
-      // Fetch user data
-      const userData = await fetchCurrentUser(data.access_token);
+      const userData = await fetchCurrentUser(); // ✅ No token needed!
       setUser(userData);
     } catch (error) {
-      throw error; // Let component handle error display
+      throw error;
     } finally {
       setIsLoading(false);
     }
