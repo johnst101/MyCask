@@ -1,17 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @import 'tailwindcss';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
+/**
+ * MyCask Brand Theme Configuration
+ * 
+ * Usage Examples:
+ * 
+ * Colors (Light Mode):
+ *   bg-white, bg-deep-green, bg-luxury-gold, bg-dark-gold, bg-whiskey-amber
+ *   text-text-primary, text-text-secondary, text-ui-highlight
+ *   border-deep-green, border-luxury-gold
+ * 
+ * Colors (Dark Mode):
+ *   bg-bg-dark-primary, bg-bg-dark-secondary
+ *   text-text-dark-primary, text-text-dark-muted
+ *   border-border-dark
+ * 
+ * Typography:
+ *   font-playfair-display (for headings/accent)
+ *   font-inter (for body text)
+ *   font-primary (alias for Inter)
+ *   font-accent (alias for Playfair Display)
+ * 
+ * Example:
+ *   <div className="bg-deep-green text-white font-accent">
+ *     <h1 className="text-luxury-gold">MyCask</h1>
+ *   </div>
+ */
+@theme {
+  /* Typography */
+  --font-playfair-display: Playfair Display, 'serif';
+  /* --font-inter: Inter, 'sans-serif';
+  --font-primary: var(--font-inter);
+  --font-accent: var(--font-playfair-display); */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Playfair Display', serif;
+  /* Brand Colors - Light Mode Palette */
+  --color-white: #ffffff;
+  --color-deep-green: #0f3b2e;
+  --color-luxury-gold: #c49a3b;
+  --color-dark-gold: #8a6a2a;
+  --color-whiskey-amber: #a86c2d;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4f4f4f;
+  --color-ui-highlight: #e2c76e;
+
+  /* Brand Colors - Dark Mode Palette */
+  --color-bg-dark-primary: #0f3b2e;
+  --color-bg-dark-secondary: #1e4d3b;
+  --color-gold-dark-mode: #c49a3b;
+  --color-highlight-gold: #e2c76e;
+  --color-whiskey-amber-dark: #a86c2d;
+  --color-text-dark-primary: #ffffff;
+  --color-text-dark-muted: #cfcfcf;
+  --color-border-dark: #2a5a47;
 }
