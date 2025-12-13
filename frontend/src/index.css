@@ -55,4 +55,7 @@
   --color-text-dark-primary: #ffffff;
   --color-text-dark-muted: #cfcfcf;
   --color-border-dark: #2a5a47;
+
+  /* Other Colors */
+  --color-error: #ff0000;
 }

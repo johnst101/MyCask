@@ -20,6 +20,10 @@ def get_any_user_by_email(db: Session, email: str) -> Optional[User]:
     """Get a user by their email."""
     return db.query(User).filter(User.email == email).first()
 
+def get_any_user_by_username(db: Session, username: str) -> Optional[User]:
+    """Get a user by their username."""
+    return db.query(User).filter(User.username == username).first()
+
 def create_user(db: Session, email: str, password_hash: str, username: Optional[str] = None, first_name: Optional[str] = None, last_name: Optional[str] = None) -> User:
     """Create a new user."""
     user = User(

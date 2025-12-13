@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from app.services.user import create_user, get_any_user_by_email
+from app.services.user import create_user, get_any_user_by_email, get_any_user_by_username
 from app.db.database import get_db
 from app.schemas.user import UserCreate, UserResponse
 from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token, validate_password_strength, verify_refresh_token
@@ -17,6 +17,12 @@ router = APIRouter(prefix="/auth", tags=["authentication"])
 @router.post("/register", status_code=status.HTTP_201_CREATED, response_model=UserResponse)
 def register(user_data: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
     '''Register a new user by providing email, password, username, first name, and last name'''
+    if get_any_user_by_email(db, user_data.email):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+
+    if get_any_user_by_username(db, user_data.username):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+
     # Validate password strength
     is_valid, error_message = validate_password_strength(user_data.password)
     if not is_valid:
@@ -24,9 +30,6 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)) -> UserRespon
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=error_message
         )
-
-    if get_any_user_by_email(db, user_data.email):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
     password_hash = hash_password(user_data.password)
 
