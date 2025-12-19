@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { registerUser } from '../services/authService';
+import PasswordRequirements, {
+  checkPasswordRequirements,
+} from './PasswordRequirements';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -8,12 +11,19 @@ const Signup = () => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+  const isFormValid =
+    checkPasswordRequirements(password) && password === confirmPassword;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
     try {
       const response = await registerUser(
         email,
@@ -94,39 +104,40 @@ const Signup = () => {
           type="text"
           placeholder="Last Name"
         />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold"
-          type="password"
-          placeholder="Password"
-          required
-        />
-        {/* TODO: Dynamically display password requirements based on the password strength */}
-        <p className="text-xs px-2">
-          Password must meet the following requirements:
-        </p>
-        <ul className="text-xs px-2 list-disc list-inside">
-          <li>At least 8 characters long</li>
-          <li>At least one uppercase letter</li>
-          <li>At least one lowercase letter</li>
-          <li>At least one number</li>
-          <li>At least one special character</li>
-        </ul>
-        <input
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold"
-          type="password"
-          placeholder="Confirm Password"
-          required
-        />
+        <div className="relative">
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
+            className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          {isPasswordFocused && <PasswordRequirements password={password} />}
+        </div>
+        <div
+          className={`transition-all duration-200 ${
+            isPasswordFocused ? 'mt-32 @[400px]:mt-36' : ''
+          }`}
+        >
+          <input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold"
+            type="password"
+            placeholder="Confirm Password"
+            required
+          />
+        </div>
         {password !== confirmPassword && (
           <div className="text-error text-sm px-2">Passwords must match.</div>
         )}
         <button
-          className="font-playfair-display px-4 py-2.5 @[400px]:px-6 @[400px]:py-3 text-base @[400px]:text-lg mt-2 mb-2 @[400px]:mb-4 bg-deep-green text-white border-2 border-deep-green rounded-md hover:bg-opacity-90 active:bg-opacity-80 transition-colors"
+          className="font-playfair-display px-4 py-2.5 @[400px]:px-6 @[400px]:py-3 text-base @[400px]:text-lg mt-2 mb-2 @[400px]:mb-4 bg-deep-green text-white border-2 border-deep-green rounded-md hover:bg-opacity-90 active:bg-opacity-80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
+          disabled={!isFormValid}
         >
           Create account
         </button>
