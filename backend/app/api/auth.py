@@ -20,8 +20,9 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)) -> UserRespon
     if get_any_user_by_email(db, user_data.email):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
-    if get_any_user_by_username(db, user_data.username):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+    if user_data.username and user_data.username.strip():
+        if get_any_user_by_username(db, user_data.username):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
 
     # Validate password strength
     is_valid, error_message = validate_password_strength(user_data.password)
@@ -44,8 +45,7 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)) -> UserRespon
         )
     except IntegrityError as e:
         db.rollback()
-        if "username" in str(e.orig).lower():
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Registration failed due to data conflict. Please try again."

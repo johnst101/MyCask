@@ -26,6 +26,12 @@ def get_any_user_by_username(db: Session, username: str) -> Optional[User]:
 
 def create_user(db: Session, email: str, password_hash: str, username: Optional[str] = None, first_name: Optional[str] = None, last_name: Optional[str] = None) -> User:
     """Create a new user."""
+    # Normalize empty strings to None to avoid unique constraint violations
+    # Convert empty strings or whitespace-only strings to None
+    username = (username.strip() if username else None) or None
+    first_name = (first_name.strip() if first_name else None) or None
+    last_name = (last_name.strip() if last_name else None) or None
+    
     user = User(
         email=email,
         password_hash=password_hash,
