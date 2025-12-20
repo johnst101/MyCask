@@ -19,16 +19,23 @@ export async function apiRequest<T>(
   const url = `${API_URL}${endpoint}`;
 
   // Get headers - override Content-Type for form data
-  const headers = useFormData
+  const baseHeaders = useFormData
     ? { 'Content-Type': 'application/x-www-form-urlencoded' }
     : getAuthHeaders();
 
+  // Merge headers properly - convert to plain object for easier merging
+  const headersObj: Record<string, string> = {
+    ...(baseHeaders as Record<string, string>),
+    ...(fetchOptions.headers &&
+    typeof fetchOptions.headers === 'object' &&
+    !(fetchOptions.headers instanceof Headers)
+      ? (fetchOptions.headers as Record<string, string>)
+      : {}),
+  };
+
   const response = await fetch(url, {
     ...fetchOptions,
-    headers: {
-      ...headers,
-      ...fetchOptions.headers,
-    },
+    headers: headersObj,
     body: useFormData ? formData : fetchOptions.body,
   });
 
