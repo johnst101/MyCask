@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import SubmitButton from './SubmitButton';
+import mc_logo from '../assets/mc_logo-removebg.png';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
   return (
     <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
+      <img
+        src={mc_logo}
+        alt="MyCask Logo"
+        className="w-30 h-30 @[400px]:w-40 @[400px]:h-40 @[600px]:w-50 @[600px]:h-50 mx-auto mb-4"
+      />
       <h1 className="font-playfair-display font-bold text-xl @[400px]:text-2xl @[600px]:text-3xl text-center text-deep-green mb-4 sm:mb-6">
         Login to MyCask
       </h1>
