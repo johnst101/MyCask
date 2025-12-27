@@ -120,6 +120,7 @@
   }
 
   /* TODO: Add more styles for form buttons and other things missing from these components */
+  /* TODO: replace the classNames with the above component classes for consistency */
 }
 
 @layer utilities {
