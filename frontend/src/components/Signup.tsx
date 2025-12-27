@@ -67,7 +67,7 @@ const Signup = () => {
   // Success message view
   if (isSuccess) {
     return (
-      <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
+      <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
         <div className="flex flex-col items-center justify-center py-8 animate-fade-in">
           <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
             <svg
@@ -96,7 +96,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
+    <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
       <h1 className="font-playfair-display font-bold text-xl @[400px]:text-2xl @[600px]:text-3xl text-center text-deep-green mb-4 sm:mb-6">
         Join the MyCask community
       </h1>
@@ -149,7 +149,11 @@ const Signup = () => {
           placeholder="Last Name"
           disabled={isLoading}
         />
-        <div className="relative">
+        <div
+          className={`relative transition-all duration-200 ${
+            isPasswordFocused ? 'mb-28 @[400px]:mb-32' : ''
+          }`}
+        >
           <span className="absolute top-1 left-2 text-red-500 text-sm font-bold z-10">
             *
           </span>
@@ -166,11 +170,7 @@ const Signup = () => {
           />
           {isPasswordFocused && <PasswordRequirements password={password} />}
         </div>
-        <div
-          className={`relative transition-all duration-200 ${
-            isPasswordFocused ? 'mt-38 @[400px]:mt-42' : ''
-          }`}
-        >
+        <div className="relative">
           <span className="absolute top-1 left-2 text-red-500 text-sm font-bold z-10">
             *
           </span>

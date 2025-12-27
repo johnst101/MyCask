@@ -41,14 +41,14 @@ const PasswordRequirements: React.FC<PasswordRequirementsProps> = ({
   ];
 
   return (
-    <div className="absolute top-full left-0 right-0 mt-2 z-10 bg-white border-2 border-luxury-gold rounded-md shadow-lg p-3 @[400px]:p-4">
+    <div className="absolute top-full left-0 right-0 mt-2 z-30 bg-white border-2 border-luxury-gold rounded-md shadow-lg p-3 @[400px]:p-4">
       {/* Arrow pointing to input */}
       <div className="absolute -top-2 left-4 w-4 h-4 bg-white border-l-2 border-t-2 border-luxury-gold transform rotate-45"></div>
 
       <p className="text-xs font-semibold text-deep-green mb-2">
         Password Requirements:
       </p>
-      <ul className="text-xs space-y-1.5">
+      <ul className="text-xs space-y-0.5">
         {requirements.map((requirement, index) => (
           <li
             key={index}
