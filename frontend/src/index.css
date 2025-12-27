@@ -61,6 +61,30 @@
   --color-success: #4bb543;
 }
 
+/* Global Anchor Tag Styles */
+a {
+  color: var(--color-luxury-gold);
+  text-decoration: none;
+  transition:
+    color 0.2s ease-in-out,
+    text-decoration 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--color-dark-gold);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-luxury-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:active {
+  color: var(--color-deep-green);
+}
+
 /* Animations */
 @keyframes fade-in {
   from {
@@ -68,6 +92,15 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -84,6 +117,10 @@
 
 .animate-fade-in {
   animation: fade-in 0.5s ease-in-out;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.5s ease-in-out;
 }
 
 .animate-scale-in {
