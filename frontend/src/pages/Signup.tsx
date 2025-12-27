@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authService';
 import PasswordRequirements, {
   checkPasswordRequirements,
-} from './PasswordRequirements';
-import SubmitButton from './SubmitButton';
+} from '../components/PasswordRequirements';
+import SubmitButton from '../components/SubmitButton';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const Signup = () => {
   // Success message view
   if (isSuccess) {
     return (
-      <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
         <div className="flex flex-col items-center justify-center py-8 animate-fade-in">
           <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
             <svg
@@ -97,10 +97,8 @@ const Signup = () => {
   }
 
   return (
-    <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto animate-fade-in">
-      <h1 className="font-playfair-display font-bold text-xl @[400px]:text-2xl @[600px]:text-3xl text-center text-deep-green mb-4 sm:mb-6">
-        Join the MyCask community
-      </h1>
+    <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto animate-fade-in">
+      <h1 className="heading-primary">Join the MyCask community</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-3 @[400px]:gap-4 text-deep-green"

@@ -3,32 +3,6 @@
 
 @import 'tailwindcss';
 
-/**
- * MyCask Brand Theme Configuration
- * 
- * Usage Examples:
- * 
- * Colors (Light Mode):
- *   bg-white, bg-deep-green, bg-luxury-gold, bg-dark-gold, bg-whiskey-amber
- *   text-text-primary, text-text-secondary, text-ui-highlight
- *   border-deep-green, border-luxury-gold
- * 
- * Colors (Dark Mode):
- *   bg-bg-dark-primary, bg-bg-dark-secondary
- *   text-text-dark-primary, text-text-dark-muted
- *   border-border-dark
- * 
- * Typography:
- *   font-playfair-display (for headings/accent)
- *   font-inter (for body text)
- *   font-primary (alias for Inter)
- *   font-accent (alias for Playfair Display)
- * 
- * Example:
- *   <div className="bg-deep-green text-white font-accent">
- *     <h1 className="text-luxury-gold">MyCask</h1>
- *   </div>
- */
 @theme {
   /* Typography */
   --font-playfair-display: Playfair Display, 'serif';
@@ -61,87 +35,103 @@
   --color-success: #4bb543;
 }
 
-/* Global Anchor Tag Styles */
-a {
-  color: var(--color-luxury-gold);
-  text-decoration: none;
-  transition:
-    color 0.2s ease-in-out,
-    text-decoration 0.2s ease-in-out;
-}
-
-a:hover {
-  color: var(--color-dark-gold);
-  text-decoration: underline;
-}
-
-a:focus {
-  outline: 2px solid var(--color-luxury-gold);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-a:active {
-  color: var(--color-deep-green);
-}
-
-/* Animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
+@layer base {
+  a {
+    color: var(--color-luxury-gold);
+    text-decoration: none;
+    transition:
+      color 0.2s ease-in-out,
+      text-decoration 0.2s ease-in-out;
   }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
+  a:hover {
+    color: var(--color-dark-gold);
+    text-decoration: underline;
   }
-  to {
-    opacity: 0;
-  }
-}
 
-@keyframes scale-in {
-  from {
-    transform: scale(0);
-    opacity: 0;
+  a:focus {
+    outline: 2px solid var(--color-luxury-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
-  to {
-    transform: scale(1);
-    opacity: 1;
+
+  a:active {
+    color: var(--color-deep-green);
+  }
+
+  /* Animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.5s ease-in-out;
+@layer components {
+  /* Card Container - used for Login, Signup, Profile, etc. */
+  .card-container {
+    @apply @container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto;
+    @apply my-4 sm:my-6 md:my-8;
+    @apply px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8;
+    @apply max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)];
+    @apply overflow-y-auto;
+  }
+
+  /* Form Input - consistent styling */
+  .form-input {
+    @apply w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3;
+    @apply text-base border-2 border-luxury-gold rounded-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Form Container */
+  .form-container {
+    @apply flex flex-col gap-3 @[400px]:gap-4 text-deep-green;
+  }
+
+  /* Heading Styles */
+  .heading-primary {
+    @apply font-playfair-display font-bold;
+    @apply text-xl @[400px]:text-2xl @[600px]:text-3xl;
+    @apply text-center text-deep-green;
+    @apply mb-4 sm:mb-6;
+  }
+
+  /* Success Icon Container */
+  .success-icon {
+    @apply w-16 h-16 @[400px]:w-20 @[400px]:h-20;
+    @apply rounded-full bg-success flex items-center justify-center;
+    @apply mb-4;
+  }
+
+  /* TODO: Add more styles for form buttons and other things missing from these components */
 }
 
-.animate-fade-out {
-  animation: fade-out 0.5s ease-in-out;
-}
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
 
-.animate-scale-in {
-  animation: scale-in 0.4s ease-out;
-}
+  .animate-fade-out {
+    animation: fade-in 0.5s ease-in-out reverse;
+  }
 
-/* Page transition wrapper */
-.page-transition-enter {
-  opacity: 0;
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transition: opacity 0.4s ease-in-out;
-}
-
-.page-transition-exit {
-  opacity: 1;
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
+  .animate-scale-in {
+    animation: scale-in 0.4s ease-out;
+  }
 }

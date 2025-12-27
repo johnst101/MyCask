@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SubmitButton from './SubmitButton';
+import SubmitButton from '../components/SubmitButton';
 import mc_logo from '../assets/mc_logo-removebg.png';
 import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +49,7 @@ const Login = () => {
 
   if (isSuccess) {
     return (
-      <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
         <div className="flex flex-col items-center justify-center py-8">
           <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
             <svg
@@ -76,7 +76,7 @@ const Login = () => {
 
   return (
     <div
-      className={`@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 ${isNavigating ? 'animate-fade-out' : 'animate-fade-in'}`}
+      className={`@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 ${isNavigating ? 'animate-fade-out' : 'animate-fade-in'}`}
     >
       <img
         src={mc_logo}
@@ -119,18 +119,16 @@ const Login = () => {
           defaultText="Login"
         />
       </form>
-      <div className="flex justify-around text-sm text-text-secondary mt-2">
+      <div className="flex justify-around text-center text-sm text-text-secondary mt-2">
         {/* TODO: eventually create forgot password and forgot email pages */}
         <a href="/forgot-password">Forgot password?</a>
         <a href="/reset-password">Forgot email?</a>
       </div>
-      <a
-        href="/signup"
-        onClick={handleSignupClick}
-        className="block text-center text-md text-text-secondary mt-4"
-      >
-        Don't have an account? Sign up
-      </a>
+      <div className="text-center text-md mt-4">
+        <a href="/signup" onClick={handleSignupClick}>
+          Don't have an account? Sign up
+        </a>
+      </div>
     </div>
   );
 };
