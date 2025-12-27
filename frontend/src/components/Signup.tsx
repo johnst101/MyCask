@@ -42,9 +42,10 @@ const Signup = () => {
       if (response) {
         setIsSuccess(true);
         // Redirect to login page after 2 seconds
+        // TODO: eventually create more dyanmic, fun, and creative transition animations
         setTimeout(() => {
           navigate('/login');
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
       if (
