@@ -12,7 +12,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,15 +25,11 @@ const Login = () => {
       const response = await loginUser(email, password);
       if (response) {
         setIsSuccess(true);
-        // Start fade-out after 1 second
-        setTimeout(() => {
-          setIsFadingOut(true);
-        }, 1000);
-        // Redirect after fade-out completes (1s delay + 0.5s animation)
+        setIsNavigating(true);
         // TODO: eventually create more dyanmic, fun, and creative transition animations
         setTimeout(() => {
           navigate('/signup');
-        }, 1500);
+        }, 1000);
       }
     } catch (error) {
       setLoginError(true);
@@ -42,12 +38,19 @@ const Login = () => {
     }
   };
 
+  const handleSignupClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsNavigating(true);
+    // Wait for fade-out animation to complete before navigating
+    setTimeout(() => {
+      navigate('/signup');
+    }, 400);
+  };
+
   if (isSuccess) {
     return (
       <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
-        <div
-          className={`flex flex-col items-center justify-center py-8 ${isFadingOut ? 'animate-fade-out' : 'animate-fade-in'}`}
-        >
+        <div className="flex flex-col items-center justify-center py-8">
           <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
             <svg
               className="w-8 h-8 @[400px]:w-10 @[400px]:h-10 text-white"
@@ -72,7 +75,9 @@ const Login = () => {
   }
 
   return (
-    <div className="@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8">
+    <div
+      className={`@container bg-white rounded-md w-full max-w-md mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 ${isNavigating ? 'animate-fade-out' : 'animate-fade-in'}`}
+    >
       <img
         src={mc_logo}
         alt="MyCask Logo"
@@ -105,22 +110,23 @@ const Login = () => {
           required
           disabled={isLoading}
         />
-
+        <div className="text-error text-sm px-2" hidden={!loginError}>
+          Invalid email or password. Please try again.
+        </div>
         <SubmitButton
           isLoading={isLoading}
           loadingText="Logging in..."
           defaultText="Login"
         />
-        <div className="text-error text-sm px-2" hidden={!loginError}>
-          Invalid email or password. Please try again.
-        </div>
       </form>
       <div className="flex justify-around text-sm text-text-secondary mt-2">
+        {/* TODO: eventually create forgot password and forgot email pages */}
         <a href="/forgot-password">Forgot password?</a>
         <a href="/reset-password">Forgot email?</a>
       </div>
       <a
         href="/signup"
+        onClick={handleSignupClick}
         className="block text-center text-md text-text-secondary mt-4"
       >
         Don't have an account? Sign up
