@@ -28,7 +28,7 @@ const Login = () => {
         setIsNavigating(true);
         // TODO: eventually create more dyanmic, fun, and creative transition animations
         setTimeout(() => {
-          navigate('/signup');
+          navigate('/profile');
         }, 1000);
       }
     } catch (error) {

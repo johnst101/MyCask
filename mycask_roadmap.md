@@ -106,7 +106,7 @@ MyCask is a mobile-first Progressive Web App (PWA) for whiskey enthusiasts to ma
 
 **Frontend:**
 
-- [ ] Create login/register forms
+- [x] Create login/register forms
 - [x] Implement auth context/state management
 - [ ] Store JWT in localStorage (or httpOnly cookies)
 - [ ] Create protected route wrapper
