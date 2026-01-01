@@ -92,6 +92,12 @@
     background-color: var(--color-white);
   }
 
+  /* Form Styles */
+  .form-container {
+    @apply flex flex-col gap-3 @[400px]:gap-4;
+    color: var(--color-deep-green);
+  }
+
   /* Form Input - consistent styling */
   .form-input {
     @apply w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3;
@@ -122,10 +128,20 @@
     background-color: rgba(15, 59, 46, 0.8);
   }
 
-  /* Form Container */
-  .form-container {
-    @apply flex flex-col gap-3 @[400px]:gap-4;
-    color: var(--color-deep-green);
+  .password-reset-button {
+    @apply font-playfair-display;
+    @apply text-white px-4 py-2 rounded-md;
+    @apply transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    border-color: var(--color-luxury-gold);
+    background-color: var(--color-luxury-gold);
+  }
+
+  .password-reset-button:hover:not(:disabled) {
+    background-color: rgba(138, 106, 42, 0.9);
+  }
+
+  .password-reset-button:active:not(:disabled) {
+    background-color: rgba(138, 106, 42, 0.8);
   }
 
   /* Heading Styles */
@@ -137,7 +153,15 @@
     color: var(--color-deep-green);
   }
 
-  /* Success Icon Container */
+  .heading-profile {
+    @apply font-playfair-display font-bold;
+    @apply text-2xl @[400px]:text-3xl @[600px]:text-4xl;
+    @apply text-left;
+    @apply mb-4 sm:mb-6 md:mb-8;
+    color: var(--color-deep-green);
+  }
+
+  /* Icons & Images Container */
   .success-icon {
     @apply w-16 h-16 @[400px]:w-20 @[400px]:h-20;
     @apply rounded-full flex items-center justify-center;
@@ -148,6 +172,12 @@
   .logo-icon {
     @apply w-30 h-30 @[400px]:w-40 @[400px]:h-40 @[600px]:w-50 @[600px]:h-50;
     @apply mx-auto mb-4;
+  }
+
+  .profile-picture {
+    @apply w-20 h-20 @[400px]:w-24 @[400px]:h-24;
+    @apply rounded-full object-cover;
+    @apply mb-4;
   }
 }
 
