@@ -1,10 +1,44 @@
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import SubmitButton from '../components/SubmitButton';
 import logo from '../assets/mc_logo-removebg.png';
+import { useAuth } from '../contexts/AuthContext';
 
 const Profile = () => {
-  const { firstName } = useParams<{ firstName: string }>(); // FIXME: is this necessary? Can I just get the username from the JWT token?
-  // TODO: get user profile data from backend based on who is logged in (from JWT token? How else should I get this information?)
+  const { user, isLoading: authLoading } = useAuth();
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+
+  // Populate form fields when user data is available
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email || '');
+      setFirstName(user.first_name || '');
+      setLastName(user.last_name || '');
+      setUsername(user.username || '');
+    }
+  }, [user]);
+
+  if (authLoading) {
+    return (
+      <div className="card-container animate-fade-in">
+        <div className="flex justify-center items-center py-8">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="card-container animate-fade-in">
+        <div className="flex justify-center items-center py-8">
+          <p>Please log in to view your profile.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="card-container animate-fade-in">
@@ -14,44 +48,56 @@ const Profile = () => {
             Hello,
           </span>{' '}
           <br />
-          {firstName || 'User'}
+          {user.first_name || 'User'}
         </h1>
-        <img src={logo} alt="MyCask Logo" className="profile-picture" />
+        <img src={logo} alt="MyCask Logo" className="profile-picture" />{' '}
+        {/* TODO: add ability to change profile picture */}
       </div>
       <form className="form-container">
         <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="form-input"
           type="email"
           placeholder="Current Email"
         />
         <input
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
           className="form-input"
           type="text"
           placeholder="Current First Name"
         />
         <input
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
           className="form-input"
           type="text"
           placeholder="Current Last Name"
         />
         <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="form-input"
           type="text"
           placeholder="Current Username"
         />
         <button className="password-reset-button">
-          Update Password (add redirect to password reset page)
+          Update Password
+          {/* TODO: add redirect to password reset page */}
         </button>
         <SubmitButton
           isLoading={false}
           loadingText="Updating profile..."
           defaultText="Update Profile"
         />
+        {/* TODO: button is disabled unless something is changed in the form */}
       </form>
       <div className="flex justify-center items-center mt-4">
-        <a href="/delete-account" className="text-red-500">
+        <a href="/delete-account" className="text-error">
           Delete Account
         </a>
+        {/* TODO: add ability to delete account */}
       </div>
     </div>
   );

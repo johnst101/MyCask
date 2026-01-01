@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import SubmitButton from '../components/SubmitButton';
 import mc_logo from '../assets/mc_logo-removebg.png';
-import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const { login } = useAuth();
   // const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -22,15 +23,13 @@ const Login = () => {
     setIsLoading(true);
     setLoginError(false);
     try {
-      const response = await loginUser(email, password);
-      if (response) {
-        setIsSuccess(true);
-        setIsNavigating(true);
-        // TODO: eventually create more dyanmic, fun, and creative transition animations
-        setTimeout(() => {
-          navigate('/profile');
-        }, 1000);
-      }
+      await login(email, password);
+      setIsSuccess(true);
+      setIsNavigating(true);
+      // TODO: eventually create more dyanmic, fun, and creative transition animations
+      setTimeout(() => {
+        navigate('/profile');
+      }, 1000);
     } catch (error) {
       setLoginError(true);
     } finally {
