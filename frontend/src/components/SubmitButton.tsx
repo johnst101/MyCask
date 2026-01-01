@@ -17,7 +17,7 @@ const SubmitButton = ({
 }: SubmitButtonProps) => {
   return (
     <button
-      className={`font-playfair-display px-4 py-2.5 @[400px]:px-6 @[400px]:py-3 text-base @[400px]:text-lg mt-2 mb-2 @[400px]:mb-4 bg-deep-green text-white border-2 border-deep-green rounded-md hover:bg-opacity-90 active:bg-opacity-80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${className}`}
+      className={`form-submit-button ${className}`}
       type={type}
       disabled={disabled || isLoading}
     >
