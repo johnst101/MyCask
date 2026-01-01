@@ -95,9 +95,10 @@
   /* Form Input - consistent styling */
   .form-input {
     @apply w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3;
-    @apply text-base border-2 border-luxury-gold rounded-md;
+    @apply text-base border-2 rounded-md;
     @apply focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    border-color: var(--color-luxury-gold);
   }
 
   /* Form Submit Button */
@@ -123,26 +124,31 @@
 
   /* Form Container */
   .form-container {
-    @apply flex flex-col gap-3 @[400px]:gap-4 text-deep-green;
+    @apply flex flex-col gap-3 @[400px]:gap-4;
+    color: var(--color-deep-green);
   }
 
   /* Heading Styles */
   .heading-primary {
     @apply font-playfair-display font-bold;
     @apply text-xl @[400px]:text-2xl @[600px]:text-3xl;
-    @apply text-center text-deep-green;
+    @apply text-center;
     @apply mb-4 sm:mb-6;
+    color: var(--color-deep-green);
   }
 
   /* Success Icon Container */
   .success-icon {
     @apply w-16 h-16 @[400px]:w-20 @[400px]:h-20;
-    @apply rounded-full bg-success flex items-center justify-center;
+    @apply rounded-full flex items-center justify-center;
     @apply mb-4;
+    background-color: var(--color-success);
   }
 
-  /* TODO: Add more styles for form buttons and other things missing from these components */
-  /* TODO: replace the classNames with the above component classes for consistency */
+  .logo-icon {
+    @apply w-30 h-30 @[400px]:w-40 @[400px]:h-40 @[600px]:w-50 @[600px]:h-50;
+    @apply mx-auto mb-4;
+  }
 }
 
 @layer utilities {

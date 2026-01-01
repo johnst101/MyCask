@@ -68,9 +68,9 @@ const Signup = () => {
   // Success message view
   if (isSuccess) {
     return (
-      <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="card-container">
         <div className="flex flex-col items-center justify-center py-8 animate-fade-in">
-          <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
+          <div className="success-icon animate-scale-in">
             <svg
               className="w-8 h-8 @[400px]:w-10 @[400px]:h-10 text-white"
               fill="none"
@@ -97,12 +97,9 @@ const Signup = () => {
   }
 
   return (
-    <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto animate-fade-in">
+    <div className="card-container animate-fade-in">
       <h1 className="heading-primary">Join the MyCask community</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3 @[400px]:gap-4 text-deep-green"
-      >
+      <form onSubmit={handleSubmit} className="form-container">
         <div className="relative">
           <span className="absolute top-1 left-2 text-red-500 text-sm font-bold z-10">
             *
@@ -110,7 +107,7 @@ const Signup = () => {
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="form-input"
             type="email"
             placeholder="Email"
             required
@@ -123,7 +120,7 @@ const Signup = () => {
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="form-input"
           type="text"
           placeholder="Username"
           disabled={isLoading}
@@ -135,7 +132,7 @@ const Signup = () => {
         <input
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          className="px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="form-input"
           type="text"
           placeholder="First Name"
           disabled={isLoading}
@@ -143,7 +140,7 @@ const Signup = () => {
         <input
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          className="px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="form-input"
           type="text"
           placeholder="Last Name"
           disabled={isLoading}
@@ -161,7 +158,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)}
             onFocus={() => setIsPasswordFocused(true)}
             onBlur={() => setIsPasswordFocused(false)}
-            className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="form-input"
             type="password"
             placeholder="Password"
             required
@@ -176,7 +173,7 @@ const Signup = () => {
           <input
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="form-input"
             type="password"
             placeholder="Confirm Password"
             required

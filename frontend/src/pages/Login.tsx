@@ -49,9 +49,9 @@ const Login = () => {
 
   if (isSuccess) {
     return (
-      <div className="@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div className="card-container">
         <div className="flex flex-col items-center justify-center py-8">
-          <div className="w-16 h-16 @[400px]:w-20 @[400px]:h-20 rounded-full bg-success flex items-center justify-center mb-4 animate-scale-in">
+          <div className="success-icon animate-scale-in">
             <svg
               className="w-8 h-8 @[400px]:w-10 @[400px]:h-10 text-white"
               fill="none"
@@ -76,24 +76,15 @@ const Login = () => {
 
   return (
     <div
-      className={`@container bg-white rounded-md w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto my-4 sm:my-6 md:my-8 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 ${isNavigating ? 'animate-fade-out' : 'animate-fade-in'}`}
+      className={`card-container ${isNavigating ? 'animate-fade-out' : 'animate-fade-in'}`}
     >
-      <img
-        src={mc_logo}
-        alt="MyCask Logo"
-        className="w-30 h-30 @[400px]:w-40 @[400px]:h-40 @[600px]:w-50 @[600px]:h-50 mx-auto mb-4"
-      />
-      <h1 className="font-playfair-display font-bold text-xl @[400px]:text-2xl @[600px]:text-3xl text-center text-deep-green mb-4 sm:mb-6">
-        Login to MyCask
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3 @[400px]:gap-4 text-deep-green"
-      >
+      <img src={mc_logo} alt="MyCask Logo" className="logo-icon" />
+      <h1 className="heading-primary">Login to MyCask</h1>
+      <form onSubmit={handleSubmit} className="form-container">
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="form-input"
           type="email"
           placeholder="Email"
           required
@@ -102,9 +93,7 @@ const Login = () => {
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          //onFocus={() => setIsPasswordFocused(true)}
-          //onBlur={() => setIsPasswordFocused(false)}
-          className="w-full px-3 py-2.5 @[400px]:px-4 @[400px]:py-3 text-base border-2 border-luxury-gold rounded-md focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="form-input"
           type="password"
           placeholder="Password"
           required
