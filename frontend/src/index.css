@@ -6,9 +6,9 @@
 @theme {
   /* Typography */
   --font-playfair-display: Playfair Display, 'serif';
-  /* --font-inter: Inter, 'sans-serif';
+  --font-inter: Inter, 'sans-serif';
   --font-primary: var(--font-inter);
-  --font-accent: var(--font-playfair-display); */
+  --font-accent: var(--font-playfair-display);
 
   /* Brand Colors - Light Mode Palette */
   --color-white: #ffffff;
@@ -36,6 +36,10 @@
 }
 
 @layer base {
+  * {
+    font-family: var(--font-primary);
+  }
+
   a {
     color: var(--color-luxury-gold);
     text-decoration: none;
@@ -88,13 +92,13 @@
     @apply my-4 sm:my-6 md:my-8;
     @apply px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8;
     @apply max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3rem)] md:max-h-[calc(100vh-4rem)];
-    @apply overflow-y-auto;
+    @apply overflow-y-auto font-primary;
     background-color: var(--color-white);
   }
 
   /* Form Styles */
   .form-container {
-    @apply flex flex-col gap-3 @[400px]:gap-4;
+    @apply flex flex-col gap-2 @[400px]:gap-4;
     color: var(--color-deep-green);
   }
 
@@ -105,11 +109,12 @@
     @apply focus:outline-none focus:ring-2 focus:ring-luxury-gold focus:border-luxury-gold;
     @apply disabled:opacity-50 disabled:cursor-not-allowed;
     border-color: var(--color-luxury-gold);
+    color: var(--color-deep-green);
   }
 
   /* Form Submit Button */
   .form-submit-button {
-    @apply font-playfair-display;
+    @apply font-accent;
     @apply px-4 py-2.5 @[400px]:px-6 @[400px]:py-3;
     @apply mt-2 mb-2 @[400px]:mb-4;
     @apply text-base @[400px]:text-lg;
@@ -128,8 +133,13 @@
     background-color: rgba(15, 59, 46, 0.8);
   }
 
+  .form-label {
+    @apply font-accent text-xs @[400px]:text-sm @[600px]:text-base;
+    color: var(--color-deep-green);
+  }
+
   .password-reset-button {
-    @apply font-playfair-display;
+    @apply font-accent;
     @apply text-white px-4 py-2 rounded-md;
     @apply transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
     border-color: var(--color-luxury-gold);
@@ -146,7 +156,7 @@
 
   /* Heading Styles */
   .heading-primary {
-    @apply font-playfair-display font-bold;
+    @apply font-accent font-bold;
     @apply text-xl @[400px]:text-2xl @[600px]:text-3xl;
     @apply text-center;
     @apply mb-4 sm:mb-6;
@@ -154,7 +164,7 @@
   }
 
   .heading-profile {
-    @apply font-playfair-display font-bold;
+    @apply font-accent font-bold;
     @apply text-2xl @[400px]:text-3xl @[600px]:text-4xl;
     @apply text-left;
     @apply mb-4 sm:mb-6 md:mb-8;
